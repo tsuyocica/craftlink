@@ -1,0 +1,9 @@
+<h1><%= @job_post.title %></h1>
+<p><%= @job_post.description %></p>
+<p>募集人数: <%= @job_post.num_workers %></p>
+<p>作業日: <%= @job_post.work_date.strftime('%Y-%m-%d (%A)') %></p>
+<p>場所: <%= @job_post.location %></p>
+<p>報酬: <%= @job_post.pay_amount %>円 (<%= @job_post.pay_type %>)</p>
+<p>ステータス: <%= @job_post.status %></p>
+
+<%= link_to '一覧へ戻る', job_posts_path, class: 'btn btn-secondary' %>
