@@ -1,0 +1,13 @@
+<h1>作業員募集一覧</h1>
+
+<% if @job_posts.any? %>
+  <% @job_posts.each do |job_post| %>
+    <div>
+      <h2><%= link_to job_post.title, job_post %></h2>
+      <p><%= job_post.description.truncate(50) %></p>
+      <p>報酬: <%= job_post.pay_amount %>円</p>
+    </div>
+  <% end %>
+<% else %>
+  <p>現在、募集中の作業はありません。</p>
+<% end %>
