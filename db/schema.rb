@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_23_143100) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_24_025101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "applications", force: :cascade do |t|
+  create_table "job_applications", force: :cascade do |t|
     t.bigint "job_post_id", null: false
     t.bigint "worker_id", null: false
     t.text "message"
     t.string "status", default: "応募中"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["job_post_id"], name: "index_applications_on_job_post_id"
-    t.index ["worker_id"], name: "index_applications_on_worker_id"
+    t.index ["job_post_id"], name: "index_job_applications_on_job_post_id"
+    t.index ["worker_id"], name: "index_job_applications_on_worker_id"
   end
 
   create_table "job_posts", force: :cascade do |t|
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_23_143100) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "applications", "job_posts"
-  add_foreign_key "applications", "users", column: "worker_id"
+  add_foreign_key "job_applications", "job_posts"
+  add_foreign_key "job_applications", "users", column: "worker_id"
   add_foreign_key "job_posts", "users", column: "owner_id"
 end
