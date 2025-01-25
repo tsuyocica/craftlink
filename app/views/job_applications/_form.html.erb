@@ -4,6 +4,7 @@
   <div>
     <%= f.label :message, "応募メッセージ" %>
     <%= f.text_area :message, required: true %>
+    <%= error_message_for(@job_application, :message) %> <!-- エラーメッセージをフォーム下部に表示 -->
   </div>
 
   <div>
