@@ -1,0 +1,37 @@
+<h1>新規作業募集</h1>
+
+<%= form_with model: @job_post, local: true do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, required: true %>
+  </div>
+  <div>
+    <%= f.label :description, "仕事内容" %>
+    <%= f.text_area :description, required: true %>
+  </div>
+  <div>
+    <%= f.label :num_workers, "募集人数" %>
+    <%= f.number_field :num_workers, required: true %>
+  </div>
+  <div>
+    <%= f.label :work_date, "作業日" %>
+    <%= f.date_select :work_date %>
+  </div>
+  <div>
+    <%= f.label :location, "作業場所" %>
+    <%= f.text_field :location %>
+  </div>
+  <div>
+    <%= f.label :pay_amount, "報酬額 (円)" %>
+    <%= f.number_field :pay_amount, required: true %>
+  </div>
+  <div>
+    <%= f.label :pay_type, "支払い方法" %>
+    <%= f.select :pay_type, ["時給", "日給", "固定"] %>
+  </div>
+  <div>
+    <%= f.submit "募集を作成", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to '一覧へ戻る', job_posts_path, class: 'btn btn-secondary' %>

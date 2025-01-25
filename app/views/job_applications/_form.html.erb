@@ -1,0 +1,13 @@
+<h2>作業に応募する</h2>
+
+<%= form_with model: [@job_post, @job_application], local: true do |f| %>
+  <div>
+    <%= f.label :message, "応募メッセージ" %>
+    <%= f.text_area :message, required: true %>
+    <%= error_message_for(@job_application, :message) %> <!-- エラーメッセージをフォーム下部に表示 -->
+  </div>
+
+  <div>
+    <%= f.submit "応募する", class: "btn btn-primary" %>
+  </div>
+<% end %>
