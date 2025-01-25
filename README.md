@@ -12,7 +12,7 @@
 
 | Column        | Type   | Options      | 説明                               |
 | ------------- | ------ | ------------ | ---------------------------------- |
-| role          | string | null: false  | ユーザーの役割（施工主 or 作業員） |
+| role          | string | null: false  | ユーザーの役割（依頼者 or 作業員） |
 | name          | string | null: false  | ユーザー名                         |
 | experience    | text   |              | 経験・スキル（簡易テキスト）       |
 | qualification | string |              | 資格（例: 第二種電気工事士）       |
@@ -27,17 +27,17 @@
 
 ## JobPosts テーブル（募集案件）
 
-| Column      | Type       | Options                        | 説明                            |
-| ----------- | ---------- | ------------------------------ | ------------------------------- |
-| owner       | references | null: false, foreign_key: true | 施工主のユーザー ID（外部キー） |
-| title       | string     | null: false                    | 募集タイトル                    |
-| description | text       | null: false                    | 作業内容の詳細                  |
-| num_workers | integer    | null: false                    | 募集人数                        |
-| work_date   | datetime   | null: false                    | 作業日と時間                    |
-| location    | string     | null: false                    | 作業場所（住所 or テキスト）    |
-| pay_amount  | integer    | null: false                    | 報酬金額                        |
-| pay_type    | string     | null: false,                   | 支払い方法（時給 or 固定額）    |
-| status      | string     | default: 'open'                | 募集中 / 締切 / 成立            |
+| Column      | Type       | Options                        | 説明                               |
+| ----------- | ---------- | ------------------------------ | ---------------------------------- |
+| owner       | references | null: false, foreign_key: true | 依頼者のユーザー ID（外部キー）    |
+| title       | string     | null: false                    | 募集タイトル                       |
+| description | text       | null: false                    | 作業内容の詳細                     |
+| num_workers | integer    | null: false                    | 募集人数                           |
+| work_date   | datetime   | null: false                    | 作業日と時間                       |
+| location    | string     | null: false                    | 作業場所（住所 or テキスト）       |
+| pay_amount  | integer    | null: false                    | 報酬金額                           |
+| pay_type    | string     | null: false,                   | 支払い方法（時給 / 日給 / 固定額） |
+| status      | string     | default: 'open'                | 募集中 / 締切 / 成立               |
 
 ### アソシエーション
 
@@ -64,7 +64,7 @@
 
 ## 必要なリレーション
 
-- JobPosts は Users（施工主）に属する（`belongs_to :user`）
+- JobPosts は Users（依頼者）に属する（`belongs_to :user`）
 - JobApplications は JobPosts（募集案件）と Users（作業員）に属する
   （`belongs_to :job_post`、`belongs_to :user`）
 
