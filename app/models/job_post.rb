@@ -10,7 +10,7 @@ class JobPost < ApplicationRecord
     validates :num_workers, numericality: { greater_than: 0 } # 募集人数は1人以上
     validates :location,    length: { maximum: 255 } # 作業場所の住所は最大255文字まで
     validates :pay_amount,  numericality: { greater_than: 0 } # 報酬額は0円以上
-    validates :pay_type,    inclusion: { in: ["時給", "日給",] } # 支払い方法は「時給」「日給」のみ許可
+    validates :pay_type,    inclusion: { in: ["hourly", "daily", "fixed"] } # 支払い方法は「時給」「日給」「固定給」のみ許可
   end
 
   validates :status, inclusion: { in: ["open", "closed", "filled"] } # 募集のステータスは「募集中」「締切」「成立」のみ許可

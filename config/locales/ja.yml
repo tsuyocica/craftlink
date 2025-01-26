@@ -1,0 +1,78 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        blank: "を入力してください"
+        taken: "はすでに存在します"
+        inclusion: "は一覧にありません"
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+
+      models:
+        user:
+          attributes:
+            name:
+              blank: "を入力してください"
+            email:
+              blank: "を入力してください"
+              taken: "はすでに存在します"
+            password:
+              blank: "を入力してください"
+            role:
+              inclusion: "は一覧にありません"
+            experience:
+              blank: "を入力してください"
+
+        job_post: # 🔹 `JobPost` のエラーメッセージを追加！
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+            description:
+              blank: "作業内容を入力してください"
+            num_workers:
+              blank: "募集人数を入力してください"
+              not_a_number: "募集人数は数値で入力してください"
+              greater_than: "募集人数は1人以上にしてください"
+            work_date:
+              blank: "作業日を入力してください"
+            location:
+              blank: "作業場所を入力してください"
+            pay_amount:
+              blank: "報酬額を入力してください"
+              not_a_number: "報酬額は数値で入力してください"
+              greater_than: "報酬額は0円以上にしてください"
+            pay_type:
+              blank: "支払い方法を選択してください"
+              inclusion: "支払い方法は「時給」または「日給」にしてください"
+            status:
+              inclusion: "ステータスは「募集中」「締切」「成立」のいずれかにしてください"
+
+  devise:
+    failure:
+      unauthenticated: "ログインが必要です"
+      invalid: "無効なメールアドレスまたはパスワードです"
+      not_found_in_database: "無効なメールアドレスまたはパスワードです"
+      timeout: "セッションがタイムアウトしました。もう一度ログインしてください"
+      locked: "アカウントがロックされました"
+      unconfirmed: "メールアドレスの確認が必要です"
+
+    sessions:
+      signed_in: "ログインしました"
+      signed_out: "ログアウトしました"
+      already_signed_out: "すでにログアウトしています"
+
+    registrations:
+      signed_up: "アカウント登録が完了しました"
+      updated: "アカウント情報を更新しました"
+      destroyed: "アカウントを削除しました"
+
+    passwords:
+      send_instructions: "パスワードリセットの案内を送信しました"
+      updated: "パスワードが更新されました"
+
+    confirmations:
+      send_instructions: "確認メールを送信しました"
+      confirmed: "メールアドレスの確認が完了しました"
+
+  errors:
+    messages:
+      not_saved: "保存に失敗しました。入力内容を確認してください"
