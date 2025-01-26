@@ -6,10 +6,10 @@ class JobPost < ApplicationRecord
   #バリデーション
   with_options presence: true do
     validates :title,       length: { maximum: 100 } # 募集タイトルは最大100文字まで
-    validates :description, length: { maximum: 1000 } # 作業内容の詳細は最大1000文字まで
-    validates :num_workers, numericality: { greater_than: 0 } # 募集人数は1人以上
+    validates :description, length: { maximum: 1_000 } # 作業内容の詳細は最大1000文字まで
+    validates :num_workers, numericality: { greater_than: 0, less_than_or_equal_to: 10 } # 募集人数は1人以上、10人以下
     validates :location,    length: { maximum: 255 } # 作業場所の住所は最大255文字まで
-    validates :pay_amount,  numericality: { greater_than: 0 } # 報酬額は0円以上
+    validates :pay_amount,  numericality: { greater_than: 3_000 } # 報酬額は3000円以上
     validates :pay_type,    inclusion: { in: ["hourly", "daily", "fixed"] } # 支払い方法は「時給」「日給」「固定給」のみ許可
   end
 

@@ -1,7 +1,10 @@
 class JobApplication < ApplicationRecord
-  #アソシエーション
+  # アソシエーション
   belongs_to :job_post
   belongs_to :worker, class_name: "User"
+
+  # 🔹 デフォルト値の設定（status が nil の場合は "pending" にする）
+  before_validation :set_default_status, on: :create
 
   # バリデーション
   with_options presence: true do
@@ -9,7 +12,7 @@ class JobApplication < ApplicationRecord
   end
 
   validates :status, inclusion: { in: ["pending", "approved", "rejected", "confirmed"] } # 応募のステータスは「応募中」「承認」「却下」「確定」のみ許可
-  validates :worker_id, uniqueness: { scope: :job_post_id, message: "さんは応募済みです。" } # 同じ作業員が同じ募集に2回応募できないようにする
+  validates :worker_id, uniqueness: { scope: :job_post_id, message: "既に応募済みです" } # 同じ作業員が同じ募集に2回応募できないようにする
 
   # ステータス（英語 → 日本語）
   STATUS_OPTIONS = {
@@ -21,5 +24,12 @@ class JobApplication < ApplicationRecord
 
   def status_label
     STATUS_OPTIONS[status] || "不明"
+  end
+
+  private
+
+  # 🔹 ステータスのデフォルト値を設定
+  def set_default_status
+    self.status ||= "pending"
   end
 end
