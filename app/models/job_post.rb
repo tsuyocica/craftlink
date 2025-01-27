@@ -15,6 +15,9 @@ class JobPost < ApplicationRecord
 
   validates :status, inclusion: { in: ["open", "closed", "filled"] } # 募集のステータスは「募集中」「締切」「成立」のみ許可
 
+  # 🔹 スコープ（現在募集中の案件のみを取得）
+  scope :opened, -> { where(status: "open") }
+
   # ステータス（英語 → 日本語）
   STATUS_OPTIONS = {
     "open"   => "募集中",

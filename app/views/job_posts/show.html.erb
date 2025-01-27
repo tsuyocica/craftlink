@@ -1,4 +1,16 @@
 <h1><%= @job_post.title %></h1>
+
+<% if @job_application.errors.any? %>
+  <div class="alert alert-danger">
+    <strong>エラーが発生しました:</strong>
+    <ul>
+      <% @job_application.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <p><%= @job_post.description %></p>
 <p>募集人数: <%= @job_post.num_workers %></p>
 <p>作業日: <%= @job_post.work_date.strftime('%Y-%m-%d (%A)') %></p>

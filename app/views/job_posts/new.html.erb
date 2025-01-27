@@ -4,34 +4,57 @@
   <div>
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, required: true %>
+    <%= error_message_for(@job_post, :title) %>
   </div>
+
   <div>
     <%= f.label :description, "仕事内容" %>
     <%= f.text_area :description, required: true %>
+    <%= error_message_for(@job_post, :description) %>
   </div>
+
   <div>
     <%= f.label :num_workers, "募集人数" %>
     <%= f.number_field :num_workers, required: true %>
+    <%= error_message_for(@job_post, :num_workers) %>
   </div>
+
   <div>
     <%= f.label :work_date, "作業日" %>
-    <%= f.date_select :work_date %>
+    <%= f.date_select :work_date, order: [:year, :month, :day], use_month_numbers: true, include_blank: false,
+          data: { date_year: true, date_month: true, date_day: true } %>
+    <p id="formatted-work-date" style="font-weight: bold; margin-top: 5px;"></p>
+    <%= error_message_for(@job_post, :work_date) %>
   </div>
+
   <div>
     <%= f.label :location, "作業場所" %>
     <%= f.text_field :location %>
+    <%= error_message_for(@job_post, :location) %>
   </div>
+
   <div>
     <%= f.label :pay_amount, "報酬額 (円)" %>
     <%= f.number_field :pay_amount, required: true %>
+    <%= error_message_for(@job_post, :pay_amount) %>
   </div>
+
   <div>
     <%= f.label :pay_type, "支払い方法" %>
-    <%= f.select :pay_type, ["時給", "日給", "固定"] %>
+    <%= f.select :pay_type, [["時給", "hourly"], ["日給", "daily"], ["固定給", "fixed"]], required: true %>
+    <%= error_message_for(@job_post, :pay_type) %>
   </div>
+
+  <div>
+  <%= f.label :status, "募集ステータス" %>
+  <%= f.select :status, [["募集中", "open"], ["締切", "closed"], ["成立", "filled"]], selected: "open", required: true %>
+  <%= error_message_for(@job_post, :status) %>
+  </div>
+
   <div>
     <%= f.submit "募集を作成", class: "btn btn-primary" %>
   </div>
 <% end %>
+
 
 <%= link_to '一覧へ戻る', job_posts_path, class: 'btn btn-secondary' %>

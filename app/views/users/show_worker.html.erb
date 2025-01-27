@@ -24,9 +24,9 @@
 <% if @is_my_page %>
   <!-- 仕事を探す（依頼者の募集案件一覧） -->
   <h2>仕事を探す</h2>
-  <% if JobPost.open.any? %>
+  <% if JobPost.opened.any? %>
     <ul>
-      <% JobPost.open.each do |job| %>
+      <% JobPost.opened.each do |job| %>
         <li>
           <%= link_to job.title, job_post_path(job) %>
           <% if @user.job_applications.exists?(job_post: job) %>
