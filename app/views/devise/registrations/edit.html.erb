@@ -1,43 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>プロフィール編集</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, html: { novalidate: true }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :patch) do |f| %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <%= f.label :name, "ユーザー名" %><br />
+    <%= f.text_field :name, required: true %>
+    <%= error_message_for(resource, :name) %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :experience, "経験・スキル" %><br />
+    <%= f.text_area :experience, required: true %>
+    <%= error_message_for(resource, :experience) %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <%= f.label :qualification, "資格（任意）" %><br />
+    <%= f.text_field :qualification %>
+    <%= error_message_for(resource, :qualification) %>
   </div>
 
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, autocomplete: "email", required: true %>
+    <%= error_message_for(resource, :email) %>
+  </div>
+
+  <hr>
+
+  <p><strong>※ プロフィールを更新するには、現在のパスワードを入力してください。</strong></p>
+
+  <div class="field">
+    <%= f.label :current_password, "現在のパスワード（必須）" %><br />
+    <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
+    <%= error_message_for(resource, :current_password) %>
+  </div>
+
+  <!-- ✅ 「パスワード変更なしで更新」のボタン -->
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "パスワードを変更せずに更新", class: "btn btn-primary" %>
   </div>
+
+  <hr>
+
+  <p>※ **パスワードを変更する場合のみ**、以下の項目を入力してください。</p>
+
+  <div class="field">
+    <%= f.label :password, "新しいパスワード（6文字以上）" %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= error_message_for(resource, :password) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "新しいパスワード（確認）" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= error_message_for(resource, :password_confirmation) %>
+  </div>
+
+  <!-- ✅ 「パスワードも変更する」ボタン -->
+  <div class="actions">
+    <%= f.submit "パスワードも変更して更新", class: "btn btn-danger" %>
+  </div>
+
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+<%= link_to "マイページへ戻る", user_path(resource), class: "btn btn-outline-dark" %>
