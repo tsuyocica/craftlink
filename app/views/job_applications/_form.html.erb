@@ -1,6 +1,6 @@
 <h2>作業に応募する</h2>
 
-<%= form_with model: [@job_post, @job_application], local: true do |f| %>
+<%= form_with model: [@job_post, @job_application], local: true, html: { novalidate: true } do |f| %>
   <div>
     <%= f.label :message, "応募メッセージ" %>
     <%= f.text_area :message, required: true %>

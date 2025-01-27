@@ -1,6 +1,6 @@
 <h1>新規作業募集</h1>
 
-<%= form_with model: @job_post, local: true do |f| %>
+<%= form_with model: @job_post, local: true, html: { novalidate: true } do |f| %>
   <div>
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, required: true %>
