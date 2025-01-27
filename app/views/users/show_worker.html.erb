@@ -1,0 +1,49 @@
+<h1>作業員ページ - <%= @user.name %> さん</h1>
+
+<p>作業員としての機能が利用できます。</p>
+
+<hr>
+
+<!-- その作業員が応募した案件一覧 -->
+<h2>応募した案件</h2>
+<% if @user.job_applications.any? %>
+  <ul>
+    <% @user.job_applications.each do |application| %>
+      <li>
+        <%= link_to application.job_post.title, job_post_path(application.job_post) %>
+        （ステータス: <%= application.status_label %>）
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>応募した案件はありません。</p>
+<% end %>
+
+<hr>
+
+<% if @is_my_page %>
+  <!-- 仕事を探す（依頼者の募集案件一覧） -->
+  <h2>仕事を探す</h2>
+  <% if JobPost.open.any? %>
+    <ul>
+      <% JobPost.open.each do |job| %>
+        <li>
+          <%= link_to job.title, job_post_path(job) %>
+          <% if @user.job_applications.exists?(job_post: job) %>
+            <span class="text-muted">(応募済み)</span>
+          <% else %>
+            <%= link_to "応募する", job_post_job_applications_path(job), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>現在募集中の案件はありません。</p>
+  <% end %>
+<% end %>
+
+<hr>
+
+<!-- 戻るリンク -->
+<%= link_to "マイページへ戻る", user_path(@user), class: "btn btn-outline-dark" %>
+<%= link_to "トップページへ戻る", root_path, class: "btn btn-outline-secondary" %>

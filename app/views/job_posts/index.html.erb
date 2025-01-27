@@ -4,7 +4,7 @@
   <% if user_signed_in? %>
     <!-- ログイン時の表示 -->
     <p>こんにちは、<%= current_user.name %> さん！</p>
-    <%= link_to "マイページ", edit_user_registration_path, class: "btn btn-primary" %>
+    <%= link_to "マイページ", user_path(current_user), class: "btn btn-primary" %>
     <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
   <% else %>
     <!-- 未ログイン時の表示 -->
