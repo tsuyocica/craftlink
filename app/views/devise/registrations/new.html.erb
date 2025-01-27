@@ -1,6 +1,6 @@
 <h2>新規登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { novalidate: true }) do |f| %>
 
   <div class="field">
     <%= f.label :name, "ユーザー名" %><br />
