@@ -1,13 +1,26 @@
-<h1>作業員募集一覧</h1>
+<h1>トップページ</h1>
 
-<% if @job_posts.any? %>
+<nav>
+  <% if user_signed_in? %>
+    <!-- ログイン時の表示 -->
+    <p>こんにちは、<%= current_user.name %> さん！</p>
+    <%= link_to "マイページ", edit_user_registration_path, class: "btn btn-primary" %>
+    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <!-- 未ログイン時の表示 -->
+    <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success" %>
+    <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
+  <% end %>
+</nav>
+
+<!-- 既存のページ内容 -->
+<div>
+  <h2>作業募集一覧</h2>
   <% @job_posts.each do |job_post| %>
     <div>
-      <h2><%= link_to job_post.title, job_post %></h2>
-      <p><%= job_post.description.truncate(50) %></p>
+      <h3><%= link_to job_post.title, job_post_path(job_post) %></h3>
+      <p><%= job_post.description.truncate(100) %></p>
       <p>報酬: <%= job_post.pay_amount %>円</p>
     </div>
   <% end %>
-<% else %>
-  <p>現在、募集中の作業はありません。</p>
-<% end %>
+</div>
