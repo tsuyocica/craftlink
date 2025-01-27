@@ -3,7 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # アソシエーション
-  has_many :job_posts, foreign_key: "owner_id", dependent: :destroy
+  has_many :job_posts, foreign_key: "owner_id", dependent: :destroy # 依頼者の募集案件
+  has_many :job_applications, foreign_key: "worker_id", dependent: :destroy # 作業員の応募
   has_many :given_reviews, class_name: "Review", foreign_key: "reviewer_id", dependent: :destroy
   has_many :received_reviews, class_name: "Review", foreign_key: "reviewee_id", dependent: :destroy
 

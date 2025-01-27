@@ -1,0 +1,27 @@
+<h1>依頼者ページ - <%= link_to @user.name, user_path(@user) %> さん</h1>
+
+<p>依頼者としての機能が利用できます。</p>
+
+<h2>募集案件一覧</h2>
+<% if @user.job_posts.any? %>
+  <ul>
+    <% @user.job_posts.each do |job_post| %>
+      <li>
+        <%= link_to job_post.title, job_post_path(job_post) %>（<%= job_post.status_label %>）
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>この依頼者はまだ作業を募集していません。</p>
+<% end %>
+
+<div class="actions">
+
+  <% if @is_my_page %>
+    <%= link_to "仕事を募集する", new_job_post_path, class: "btn btn-success" %>
+    <%= link_to "作業員を探す", "#", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "トップページへ戻る", root_path, class: "btn btn-outline-dark" %>
+  <%= link_to "自分のマイページへ戻る", user_path(current_user), class: "btn btn-outline-dark" %>
+</div>

@@ -1,9 +1,14 @@
 <h1><%= @user.name %> さんのマイページ</h1>
 
-<p>役割: <%= @user.role_label %></p>
-<p>資格: <%= @user.qualification.presence || "未登録" %></p>
-<p>経験: <%= @user.experience.presence || "未登録" %></p>
+<p><strong>メールアドレス:</strong> <%= @user.email %></p>
+<p><strong>経験・スキル:</strong> <%= @user.experience.presence || "未設定" %></p>
+<p><strong>資格:</strong> <%= @user.qualification.presence || "未設定" %></p>
 
-<% if @user == current_user %>
-  <%= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-primary" %>
+<% if @is_my_page %>
+  <%= link_to "プロフィール編集", edit_user_registration_path, class: "btn btn-secondary" %>
 <% end %>
+
+<div class="actions">
+  <%= link_to "依頼者ページへ", show_owner_user_path(@user), class: "btn btn-primary" %>
+  <%= link_to "作業員ページへ", show_worker_user_path(@user), class: "btn btn-secondary" %>
+</div>
