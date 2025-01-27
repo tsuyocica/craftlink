@@ -1,0 +1,9 @@
+<h1><%= @user.name %> さんのマイページ</h1>
+
+<p>役割: <%= @user.role_label %></p>
+<p>資格: <%= @user.qualification.presence || "未登録" %></p>
+<p>経験: <%= @user.experience.presence || "未登録" %></p>
+
+<% if @user == current_user %>
+  <%= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-primary" %>
+<% end %>
