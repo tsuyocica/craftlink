@@ -7,7 +7,7 @@
   <ul>
     <% @user.job_posts.each do |job_post| %>
       <li>
-        <%= link_to job_post.title, job_post_path(job_post) %>（<%= job_post.status_label %>）
+        <%= link_to job_post.work_title, job_post_path(job_post) %>（<%= job_post.work_status_label %>）
       </li>
     <% end %>
   </ul>

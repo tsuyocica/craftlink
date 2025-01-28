@@ -10,7 +10,7 @@
   <ul>
     <% @user.job_applications.each do |application| %>
       <li>
-        <%= link_to application.job_post.title, job_post_path(application.job_post) %>
+        <%= link_to application.job_post.work_title, job_post_path(application.job_post) %>
         （ステータス: <%= application.status_label %>）
       </li>
     <% end %>
@@ -24,15 +24,15 @@
 <% if @is_my_page %>
   <!-- 仕事を探す（依頼者の募集案件一覧） -->
   <h2>仕事を探す</h2>
-  <% if JobPost.opened.any? %>
+  <% if JobPost.opening.any? %>
     <ul>
-      <% JobPost.opened.each do |job| %>
+      <% JobPost.opening.each do |job_post| %>
         <li>
-          <%= link_to job.title, job_post_path(job) %>
-          <% if @user.job_applications.exists?(job_post: job) %>
+          <%= link_to job_post.work_title, job_post_path(job_post) %>
+          <% if @user.job_applications.exists?(job_post: job_post) %>
             <span class="text-muted">(応募済み)</span>
           <% else %>
-            <%= link_to "応募する", job_post_job_applications_path(job), method: :post, class: "btn btn-primary" %>
+            <%= link_to "応募する", job_post_job_applications_path(job_post), method: :post, class: "btn btn-primary" %>
           <% end %>
         </li>
       <% end %>
