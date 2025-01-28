@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_25_070058) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_24_025101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,14 +27,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_070058) do
 
   create_table "job_posts", force: :cascade do |t|
     t.bigint "owner_id", null: false
-    t.string "title", null: false
-    t.text "description"
-    t.integer "num_workers", default: 1
-    t.datetime "work_date", null: false
-    t.string "location"
-    t.integer "pay_amount", null: false
-    t.string "pay_type", null: false
-    t.string "status", default: "募集中"
+    t.string "work_title", null: false
+    t.text "work_description", null: false
+    t.integer "num_workers", default: 1, null: false
+    t.date "work_start_date", default: -> { "CURRENT_DATE" }
+    t.date "work_end_date", default: -> { "CURRENT_DATE" }
+    t.time "work_start_time", default: "2000-01-01 08:00:00"
+    t.time "work_end_time", default: "2000-01-01 17:00:00"
+    t.string "work_location", null: false
+    t.decimal "work_latitude", precision: 10, scale: 6, null: false
+    t.decimal "work_longitude", precision: 10, scale: 6, null: false
+    t.integer "work_pay_amount", null: false
+    t.string "work_pay_type", null: false
+    t.string "work_status", default: "open"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_job_posts_on_owner_id"
@@ -49,9 +54,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_25_070058) do
     t.string "name", null: false
     t.string "role", default: "worker", null: false
     t.string "qualification", default: ""
+    t.text "experience", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "experience"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

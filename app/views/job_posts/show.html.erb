@@ -1,4 +1,4 @@
-<h1><%= @job_post.title %></h1>
+<h1><%= @job_post.work_title %></h1>
 
 <% if @job_application.errors.any? %>
   <div class="alert alert-danger">
@@ -11,12 +11,12 @@
   </div>
 <% end %>
 
-<p><%= @job_post.description %></p>
+<p><%= @job_post.work_description %></p>
 <p>募集人数: <%= @job_post.num_workers %></p>
-<p>作業日: <%= @job_post.work_date.strftime('%Y-%m-%d (%A)') %></p>
-<p>場所: <%= @job_post.location %></p>
-<p>報酬: <%= @job_post.pay_amount %>円 (<%= @job_post.pay_type %>)</p>
-<p>ステータス: <%= @job_post.status %></p>
+<p>作業日: <%= @job_post.work_work_date.strftime('%Y-%m-%d (%A)') %></p>
+<p>場所: <%= @job_post.work_location %></p>
+<p>報酬: <%= @job_post.work_pay_amount %>円 (<%= @job_post.work_pay_type %>)</p>
+<p>ステータス: <%= @job_post.work_status %></p>
 
 <!-- 応募フォームを表示 -->
 <%= render 'job_applications/form' %>

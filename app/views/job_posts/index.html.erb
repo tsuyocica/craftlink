@@ -18,9 +18,9 @@
   <h2>作業募集一覧</h2>
   <% @job_posts.each do |job_post| %>
     <div>
-      <h3><%= link_to job_post.title, job_post_path(job_post) %></h3>
-      <p><%= job_post.description.truncate(100) %></p>
-      <p>報酬: <%= job_post.pay_amount %>円</p>
+      <h3><%= link_to job_post.work_title, job_post_path(job_post) %></h3>
+      <p><%= job_post.work_description.truncate(100) %></p>
+      <p>報酬: <%= job_post.work_pay_amount %>円</p>
     </div>
   <% end %>
 </div>
