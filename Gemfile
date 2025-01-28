@@ -71,7 +71,6 @@ group :test do
 end
 
 gem 'devise'
-gem "cssbundling-rails"
 gem 'bootstrap', '~> 5.3.0'
 gem 'sassc-rails' # BootstrapはSassを使うため
 gem "geocoder", "~> 1.8"
