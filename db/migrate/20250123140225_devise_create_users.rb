@@ -18,6 +18,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string  :name,             null: false
       t.string  :role,             null: false, default: "worker" # worker or owner
       t.string  :qualification,    default: "" # MVPではシンプルに資格を文字列で管理
+      t.text    :experience,       null: false
 
       t.timestamps null: false
 
