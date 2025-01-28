@@ -4,6 +4,6 @@ Geocoder.configure(
   use_https: true,  # HTTPSを使用
   timeout: 5,       # タイムアウト時間（秒）
   units: :km,       # 距離の単位（km）
-  cache: Redis.new, # キャッシュ（Redisを使用する場合）
+  # cache: Redis.new, # キャッシュ（Redisを使用する場合）
   cache_prefix: "geocoder:" # キャッシュのキー
 )
